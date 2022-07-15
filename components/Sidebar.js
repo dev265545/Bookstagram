@@ -31,28 +31,25 @@ function Sidebar() {
         <div className="hidden md:inline text-left dark:text-white/75 text-sm">
           <div className="font-medium sidebarButton space-y-0.5">
             <div className="flex justify-between space-x-2">
-              <h4>Who viewed your profile</h4>
+              <h4>Number of followers</h4>
               <span className="text-blue-500">321</span>
             </div>
             <div className="flex justify-between space-x-2">
-              <h4>Views of your post</h4>
+              <h4>People following you</h4>
               <span className="text-blue-500">1,892</span>
             </div>
           </div>
 
           <div className="sidebarButton">
-            <h4 className="leading-4 text-xs">
-              Access exclusive tools & insights
-            </h4>
+            <h4 className="leading-4 text-xs"></h4>
             <h4 className="dark:text-white font-medium">
-              <span className="w-3 h-3 bg-gradient-to-tr from-yellow-700 to-yellow-200 inline-block rounded-sm mr-1" />{" "}
-              Try Premium for free
+              {/* <span className="w-3 h-3 bg-gradient-to-tr from-yellow-700 to-yellow-200 inline-block rounded-sm mr-1" />{" "} */}
             </h4>
           </div>
 
           <div className="sidebarButton flex items-center space-x-1.5">
             <BookmarkOutlinedIcon className="!-ml-1" />
-            <h4 className="dark:text-white font-medium">My items</h4>
+            <h4 className="dark:text-white font-medium">My favourite Books</h4>
           </div>
         </div>
       </div>

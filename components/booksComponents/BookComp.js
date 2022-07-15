@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Modal from "../components/booksComponents/Modal";
-import isUndefined from "../components/booksComponents/Undefined";
+import Modal from "./Modal";
+import isUndefined from "./Undefined";
 
 const BookComp = ({
   title,
@@ -32,6 +32,7 @@ const BookComp = ({
       <div className="flex justify-center p-6">
         <div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-gray-800 shadow-lg">
           {thumbnail && (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
               src={thumbnail}

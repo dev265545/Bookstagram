@@ -14,7 +14,7 @@ function Input() {
   const [modalType, setModalType] = useRecoilState(modalTypeState);
 
   return (
-    <div className="bg-white dark:bg-[#1D2226] rounded-lg p-3 space-y-3 border border-gray-300 dark:border-none">
+    <div className="bg-white dark:bg-[#1D2226] rounded-lg p-3 space-y-3 dark:border-none">
       <div className="flex items-center space-x-2">
         <Avatar
           src={session?.user?.image}
@@ -31,26 +31,6 @@ function Input() {
         >
           Start a post
         </motion.button>
-      </div>
-      <div className="flex items-center flex-wrap gap-4 justify-center md:gap-x-10">
-        <button className="inputButton group">
-          <PhotoSizeSelectActualIcon className="text-blue-400" />
-          <h4 className="opacity-80 group-hover:opacity-100">Photo</h4>
-        </button>
-        <button className="inputButton group">
-          <VideoCameraBackIcon className="text-green-400" />
-          <h4 className="opacity-80 group-hover:opacity-100">Video</h4>
-        </button>
-        <button className="inputButton group">
-          <BusinessCenterIcon className="text-blue-300" />
-          <h4 className="opacity-80 group-hover:opacity-100">Job</h4>
-        </button>
-        <button className="inputButton group">
-          <ArticleIcon className="text-red-400" />
-          <h4 className="opacity-80 group-hover:opacity-100 whitespace-nowrap">
-            Write Article
-          </h4>
-        </button>
       </div>
     </div>
   );

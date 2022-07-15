@@ -19,6 +19,9 @@ function Post({ post, modalPost }) {
   const [modalType, setModalType] = useRecoilState(modalTypeState);
   const [postState, setPostState] = useRecoilState(getPostState);
   const [showInput, setShowInput] = useState(false);
+
+  const [comments, setComments] = useState([]);
+  const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
   const [handlePost, setHandlePost] = useRecoilState(handlePostState);
 

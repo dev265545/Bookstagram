@@ -68,7 +68,7 @@ const Modal = ({ handleClose, type }) => {
           animate="visible"
           exit="exit"
         >
-          <div className="flex items-center justify-between border-b border-white/75 px-4 py-2.5">
+          <div className="flex items-center justify-between  border-white/75 px-4 py-2.5">
             <h4 className="text-xl">Create a post</h4>
             <IconButton onClick={handleClose}>
               <CloseRoundedIcon className="h-7 w-7 dark:text-white/75" />

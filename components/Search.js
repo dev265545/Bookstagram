@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import pic3 from "../assets/vecteezy_the-female-character-she-searched-for-books-to-read-from_5611509.svg";
 import axios from "axios";
-import BookComp from "../components/BookComp";
+import BookComp from "./booksComponents/BookComp";
 
 function Search() {
   const [Search, setSearch] = useState("");

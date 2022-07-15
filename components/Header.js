@@ -46,7 +46,7 @@ function Header() {
           <input
             type="text"
             placeholder="Search"
-            className="hidden md:inline-flex bg-transparent text-sm focus:outline-none placeholder-black/70 dark:placeholder-white/75 flex-grow"
+            className="hidden md:inline-flex bg-transparent border-none text-sm focus:outline-none placeholder-black/70 dark:placeholder-white/75 flex-grow"
           />
         </div>
       </div>

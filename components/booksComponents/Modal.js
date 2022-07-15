@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 const Modal = ({
   visible,
   modalbook,
@@ -20,11 +21,12 @@ const Modal = ({
     <>
       <>
         <div
-          className=" backdrop-blur-md  fade fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-          id="exampleModalFullscreen"
           aria-labelledby="exampleModalFullscreenLabel"
           aria-hidden="true"
           onClick={handleOnclose}
+          id="medium-modal"
+          tabIndex="-1"
+          className="backdrop-blur-md  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
         >
           <div className="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
             <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-gray-700 bg-clip-padding rounded-md outline-none text-current">

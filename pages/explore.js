@@ -35,10 +35,7 @@ export default function Explore() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <section
-        className="min-h-screen bg-blue-100 p-32 text-center"
-        style={instyle}
-      >
+      <section className=" bg-blue-100" style={instyle}>
         <Search />
       </section>
     </div>
