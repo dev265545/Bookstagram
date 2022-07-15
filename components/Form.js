@@ -7,8 +7,6 @@ import axios from "axios";
 import { Image } from "cloudinary-react";
 import EmojiHappyIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 
-import Picker from "emoji-picker-react";
-
 function Form() {
   const [input, setInput] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
