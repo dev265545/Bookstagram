@@ -20,7 +20,11 @@ function HeaderLink({ Icon, text, feed, active, avatar, hidden, link }) {
       {avatar ? (
         <Icon className="!h-7 !w-7 lg:!-mb-1" src={session?.user?.image} />
       ) : (
-        <Icon />
+        <Icon
+          onClick={() => {
+            router.push(link);
+          }}
+        />
       )}
 
       <h4
