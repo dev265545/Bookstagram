@@ -1,6 +1,10 @@
+import { IconButton } from "@mui/material";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-function HeaderLink({ Icon, text, feed, active, avatar, hidden }) {
+function HeaderLink({ Icon, text, feed, active, avatar, hidden, link }) {
+  const router = useRouter();
   const { data: session } = useSession();
   return (
     <div
@@ -20,6 +24,9 @@ function HeaderLink({ Icon, text, feed, active, avatar, hidden }) {
       )}
 
       <h4
+        onClick={() => {
+          router.push(link);
+        }}
         className={`text-sm ${
           feed && "hidden lg:flex justify-center w-full mx-auto"
         }`}

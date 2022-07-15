@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (

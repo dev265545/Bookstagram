@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import HeaderLink from "./HeaderLink";
+import HeaderLink from "../HeaderLink";
 import GroupIcon from "@mui/icons-material/Group";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -11,8 +11,8 @@ import { Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import darkLogo from "../assets/Bookstagram-logos_white.png";
-import lightLogo from "../assets/Bookstagram-logos_black.png";
+import darkLogo from "../../assets/Bookstagram-logos_white.png";
+import lightLogo from "../../assets/Bookstagram-logos_black.png";
 const spring = {
   type: "spring",
   stiffness: 700,
@@ -53,8 +53,14 @@ function Header() {
       {/* Right */}
 
       <div className="flex items-center space-x-6">
-        <HeaderLink Icon={HomeRoundedIcon} text="Home" feed active link="/" />
-        <HeaderLink Icon={GroupIcon} text="Explore" feed link="/explore" />
+        <HeaderLink Icon={HomeRoundedIcon} text="Home" feed link="/" />
+        <HeaderLink
+          Icon={GroupIcon}
+          text="Explore"
+          feed
+          active
+          link="/explore"
+        />
 
         <HeaderLink Icon={ChatIcon} text="Messaging" feed />
         <HeaderLink Icon={NotificationsIcon} text="Notifications" feed />

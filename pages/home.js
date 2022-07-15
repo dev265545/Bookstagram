@@ -11,7 +11,6 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import { getProviders, signIn } from "next-auth/react";
 
 function Home({ providers }) {
-  console.log(providers);
   return (
     <div className="space-y-10 relative">
       <header className=" flex justify-around items-center py-4 ">
@@ -21,7 +20,7 @@ function Home({ providers }) {
 
         <div className="flex items-center sm:divide-x divide-gray-300">
           <div className="hidden sm:flex space-x-8 pr-4">
-            <HeaderLink Icon={ExploreIcon} text="Discover" />
+            <HeaderLink Icon={ExploreIcon} text="Explore" />
             <HeaderLink Icon={GroupIcon} text="People" />
             <HeaderLink Icon={OndemandVideoSharpIcon} text="Learning" />
             <HeaderLink Icon={BusinessCenterIcon} text="Jobs" />
@@ -47,7 +46,7 @@ function Home({ providers }) {
           </h1>
           <div className="space-y-4">
             <div className="intent">
-              <h2 className="text-xl">Search for a job</h2>
+              <h2 className="text-xl">Discover New Books</h2>
               <ArrowForwardIosRoundedIcon className="text-gray-700" />
             </div>
             <div className="intent">

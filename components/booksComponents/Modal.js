@@ -1,0 +1,83 @@
+const Modal = ({
+  visible,
+  modalbook,
+  thumbnail,
+  onClose,
+  title,
+  infoLink,
+  description,
+  authors,
+  amount,
+}) => {
+  const handleOnclose = () => {
+    onClose();
+  };
+
+  if (!visible) {
+    return null;
+  }
+  return (
+    <>
+      <>
+        <div
+          className=" backdrop-blur-md  fade fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+          id="exampleModalFullscreen"
+          aria-labelledby="exampleModalFullscreenLabel"
+          aria-hidden="true"
+          onClick={handleOnclose}
+        >
+          <div className="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
+            <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-gray-700 bg-clip-padding rounded-md outline-none text-current">
+              <div className="flex flex-col p-6">
+                <div className=" flex flex-row">
+                  <img
+                    className=" w-full h-full md:h-auto object-none md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+                    src={thumbnail}
+                    alt={"Not availbale"}
+                  />
+                  <div className="flex flex-col">
+                    <h5 className="text-gray-100 text-xl font-medium mb-2">
+                      Title : {title}
+                    </h5>
+                    <p className="text-gray-100 text-base mb-4">
+                      {" "}
+                      Author(s) : {authors}{" "}
+                    </p>
+                    <p className="text-gray-100 text-base mb-4">
+                      {" "}
+                      Price: &#8377;{amount}
+                    </p>
+                    <a
+                      href={infoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 text-base mb-4"
+                    >
+                      {" "}
+                      More Info
+                    </a>
+                  </div>
+                </div>
+
+                <div className=" ">
+                  <p className="text-gray-100 text-base"> {description}</p>
+                </div>
+
+                <div className="modal-footer flex flex-shrink-0 flex-wrap items-center  p-4 border-t border-gray-200 rounded-b-md"></div>
+                <button
+                  type="button"
+                  className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-900 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    </>
+  );
+};
+
+export default Modal;
