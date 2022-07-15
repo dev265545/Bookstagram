@@ -30,6 +30,10 @@ export default function Explore() {
 
   return (
     <div>
+      <Head>
+        <title>Explore | Bookstagram</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header />
       <section
         className="min-h-screen bg-blue-100 p-32 text-center"
