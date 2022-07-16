@@ -17,8 +17,8 @@ export default function Home({ trendingResults, followResults, providers }) {
   return (
     <div className="">
       <Head>
-        <title>Home / Twitter</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Feed | Bookstagram</title>
+        <link rel="icon" href="../Bookstagram-logos.ico" />
       </Head>
 
       <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
