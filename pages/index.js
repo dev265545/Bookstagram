@@ -1,91 +1,56 @@
-import { AnimatePresence } from "framer-motion";
-import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { modalState, modalTypeState } from "../atoms/modalAtom";
 import Feed from "../components/Feed";
-import Header from "../components/Header";
-import Modal from "../components/Modal";
 import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widgets";
-import { connectToDatabase } from "../util/mongodb";
+import { getProviders, getSession, useSession } from "next-auth/react";
+import Login from "../components/Login";
+import Modal from "../components/Modal";
+import { modalState } from "../atoms/modalAtom";
+import { useRecoilState } from "recoil";
 
-export default function Home({ posts, articles }) {
-  const [modalOpen, setModalOpen] = useRecoilState(modalState);
-  const [modalType, setModalType] = useRecoilState(modalTypeState);
-  const router = useRouter();
-  const { status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      router.push("/home");
-    },
-  });
+export default function Home({ trendingResults, followResults, providers }) {
+  const { data: session } = useSession();
+  const [isOpen, setIsOpen] = useRecoilState(modalState);
+
+  if (!session) return <Login providers={providers} />;
 
   return (
-    <div className="bg-[#F3F2EF] dark:bg-black dark:text-white h-screen overflow-y-scroll md:space-y-6">
+    <div className="">
       <Head>
-        <title>Feed | Bookstagram</title>
+        <title>Home / Twitter</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
+        <Sidebar />
+        <Feed />
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
 
-      <main className="flex justify-center gap-x-5 px-4 sm:px-12">
-        <div className="flex flex-col md:flex-row gap-5">
-          <Sidebar />
-          <Feed posts={posts} />
-        </div>
-        <Widgets articles={articles} />
-        <AnimatePresence>
-          {modalOpen && (
-            <Modal handleClose={() => setModalOpen(false)} type={modalType} />
-          )}
-        </AnimatePresence>
+        {isOpen && <Modal />}
       </main>
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
-  // Check if the user is authenticated on the server...
+  const trendingResults = await fetch("https://jsonkeeper.com/b/NKEV").then(
+    (res) => res.json()
+  );
+  const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
+    (res) => res.json()
+  );
+  const providers = await getProviders();
   const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/home",
-      },
-    };
-  }
-
-  // Get posts on SSR
-  const { db } = await connectToDatabase();
-  const posts = await db
-    .collection("posts")
-    .find()
-    .sort({ timestamp: -1 })
-    .toArray();
-
-  // Get Google News API
-  const results = await fetch(
-    `https://newsapi.org/v2/everything?q=books&apiKey=${process.env.NEWS_API_KEY}`
-  ).then((res) => res.json());
 
   return {
     props: {
+      trendingResults,
+      followResults,
+      providers,
       session,
-      articles: results.articles,
-      posts: posts.map((post) => ({
-        _id: post._id.toString(),
-        input: post.input,
-        photoUrl: post.photoUrl,
-        username: post.username,
-        email: post.email,
-        userImg: post.userImg,
-        createdAt: post.createdAt,
-      })),
     },
   };
 }

@@ -1,133 +1,214 @@
-import { Avatar, IconButton } from "@mui/material";
-import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
-import ThumbUpOffAltRoundedIcon from "@mui/icons-material/ThumbUpOffAltRounded";
-import { useRecoilState } from "recoil";
-import { handlePostState, getPostState } from "../atoms/postAtom";
-import { useState } from "react";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import ReplyRoundedIcon from "@mui/icons-material/ReplyRounded";
-import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
-import { modalState, modalTypeState } from "../atoms/modalAtom";
-import TimeAgo from "timeago-react";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  setDoc,
+} from "@firebase/firestore";
+import {
+  ChartBarIcon,
+  ChatIcon,
+  DotsHorizontalIcon,
+  HeartIcon,
+  ShareIcon,
+  SwitchHorizontalIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
+import {
+  HeartIcon as HeartIconFilled,
+  ChatIcon as ChatIconFilled,
+} from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Moment from "react-moment";
+import { useRecoilState } from "recoil";
+import { modalState, postIdState } from "../atoms/modalAtom";
+import { db } from "../firebase";
 
-function Post({ post, modalPost }) {
+function Post({ id, post, postPage }) {
   const { data: session } = useSession();
-  const [modalOpen, setModalOpen] = useRecoilState(modalState);
-  const [modalType, setModalType] = useRecoilState(modalTypeState);
-  const [postState, setPostState] = useRecoilState(getPostState);
-  const [showInput, setShowInput] = useState(false);
-
+  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [postId, setPostId] = useRecoilState(postIdState);
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
-  const [handlePost, setHandlePost] = useRecoilState(handlePostState);
+  const router = useRouter();
 
-  const truncate = (string, n) =>
-    string?.length > n ? string.substr(0, n - 1) + "...see more" : string;
+  useEffect(
+    () =>
+      onSnapshot(
+        query(
+          collection(db, "posts", id, "comments"),
+          orderBy("timestamp", "desc")
+        ),
+        (snapshot) => setComments(snapshot.docs)
+      ),
+    [db, id]
+  );
 
-  const deletePost = async () => {
-    const response = await fetch(`/api/post/${post._id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+  useEffect(
+    () =>
+      onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
+        setLikes(snapshot.docs)
+      ),
+    [db, id]
+  );
 
-    setHandlePost(true);
-    setModalOpen(false);
+  useEffect(
+    () =>
+      setLiked(
+        likes.findIndex((like) => like.id === session?.user?.uid) !== -1
+      ),
+    [likes]
+  );
+
+  const likePost = async () => {
+    if (liked) {
+      await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
+    } else {
+      await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
+        username: session.user.name,
+      });
+    }
   };
 
   return (
     <div
-      className={`bg-white dark:bg-[#1D2226] ${
-        modalPost ? "rounded-r-lg" : "rounded-lg"
-      } space-y-2 py-2.5 border border-gray-300 dark:border-none`}
+      className="p-3 flex cursor-pointer border-b border-gray-700"
+      onClick={() => router.push(`/${id}`)}
     >
-      <div className="flex items-center px-2.5 cursor-pointer">
-        <Avatar src={post.userImg} className="!h-10 !w-10 cursor-pointer" />
-        <div className="mr-auto ml-2 leading-none">
-          <h6 className="font-medium hover:text-blue-500 hover:underline">
-            {post.username}
-          </h6>
-          <p className="text-sm dark:text-white/75 opacity-80">{post.email}</p>
-          <TimeAgo
-            datetime={post.createdAt}
-            className="text-xs dark:text-white/75 opacity-80"
-          />
-        </div>
-        {modalPost ? (
-          <IconButton onClick={() => setModalOpen(false)}>
-            <CloseRoundedIcon className="dark:text-white/75 h-7 w-7" />
-          </IconButton>
-        ) : (
-          <IconButton>
-            <MoreHorizRoundedIcon className="dark:text-white/75 h-7 w-7" />
-          </IconButton>
-        )}
-      </div>
-
-      {post.input && (
-        <div className="px-2.5 break-all md:break-normal">
-          {modalPost || showInput ? (
-            <p onClick={() => setShowInput(false)}>{post.input}</p>
-          ) : (
-            <p onClick={() => setShowInput(true)}>
-              {truncate(post.input, 150)}
-            </p>
-          )}
-        </div>
-      )}
-
-      {post.photoUrl && !modalPost && (
-        // eslint-disable-next-line @next/next/no-img-element
+      {!postPage && (
         <img
-          src={post.photoUrl}
+          src={post?.userImg}
           alt=""
-          className="w-full cursor-pointer"
-          onClick={() => {
-            setModalOpen(true);
-            setModalType("gifYouUp");
-            setPostState(post);
-          }}
+          className="h-11 w-11 rounded-full mr-4"
         />
       )}
-
-      <div className="flex justify-evenly items-center dark:border-t border-gray-600/80 mx-2.5 pt-2 text-black/60 dark:text-white/75">
-        {modalPost ? (
-          <button className="postButton">
-            <CommentOutlinedIcon />
-            <h4>Comment</h4>
-          </button>
-        ) : (
-          <button
-            className={`postButton ${liked && "text-blue-500"}`}
-            onClick={() => setLiked(!liked)}
-          >
-            {liked ? (
-              <ThumbUpOffAltRoundedIcon className="-scale-x-100" />
-            ) : (
-              <ThumbUpOffAltOutlinedIcon className="-scale-x-100" />
+      <div className="flex flex-col space-y-2 w-full">
+        <div className={`flex ${!postPage && "justify-between"}`}>
+          {postPage && (
+            <img
+              src={post?.userImg}
+              alt="Profile Pic"
+              className="h-11 w-11 rounded-full mr-4"
+            />
+          )}
+          <div className="text-[#6e767d]">
+            <div className="inline-block group">
+              <h4
+                className={`font-bold text-[15px] sm:text-base text-[#d9d9d9] group-hover:underline ${
+                  !postPage && "inline-block"
+                }`}
+              >
+                {post?.username}
+              </h4>
+              <span
+                className={`text-sm sm:text-[15px] ${!postPage && "ml-1.5"}`}
+              >
+                @{post?.tag}
+              </span>
+            </div>
+            ·{" "}
+            <span className="hover:underline text-sm sm:text-[15px]">
+              <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
+            </span>
+            {!postPage && (
+              <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">
+                {post?.text}
+              </p>
             )}
-
-            <h4>Like</h4>
-          </button>
+          </div>
+          <div className="icon group flex-shrink-0 ml-auto">
+            <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
+          </div>
+        </div>
+        {postPage && (
+          <p className="text-[#d9d9d9] mt-0.5 text-xl">{post?.text}</p>
         )}
-
-        {session?.user?.email === post.email ? (
-          <button
-            className="postButton focus:text-red-400"
-            onClick={deletePost}
+        <img
+          src={post?.image}
+          alt=""
+          className="rounded-2xl max-h-[700px] object-cover mr-2"
+        />
+        <div
+          className={`text-[#6e767d] flex justify-between w-10/12 ${
+            postPage && "mx-auto"
+          }`}
+        >
+          <div
+            className="flex items-center space-x-1 group"
+            onClick={(e) => {
+              e.stopPropagation();
+              setPostId(id);
+              setIsOpen(true);
+            }}
           >
-            <DeleteRoundedIcon />
-            <h4>Delete post</h4>
-          </button>
-        ) : (
-          <button className="postButton ">
-            <ReplyRoundedIcon className="-scale-x-100" />
-            <h4>Share</h4>
-          </button>
-        )}
+            <div className="icon group-hover:bg-[#1d9bf0] group-hover:bg-opacity-10">
+              <ChatIcon className="h-5 group-hover:text-[#1d9bf0]" />
+            </div>
+            {comments.length > 0 && (
+              <span className="group-hover:text-[#1d9bf0] text-sm">
+                {comments.length}
+              </span>
+            )}
+          </div>
+
+          {session.user.uid === post?.id ? (
+            <div
+              className="flex items-center space-x-1 group"
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteDoc(doc(db, "posts", id));
+                router.push("/");
+              }}
+            >
+              <div className="icon group-hover:bg-red-600/10">
+                <TrashIcon className="h-5 group-hover:text-red-600" />
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-1 group">
+              <div className="icon group-hover:bg-green-500/10">
+                <SwitchHorizontalIcon className="h-5 group-hover:text-green-500" />
+              </div>
+            </div>
+          )}
+
+          <div
+            className="flex items-center space-x-1 group"
+            onClick={(e) => {
+              e.stopPropagation();
+              likePost();
+            }}
+          >
+            <div className="icon group-hover:bg-pink-600/10">
+              {liked ? (
+                <HeartIconFilled className="h-5 text-pink-600" />
+              ) : (
+                <HeartIcon className="h-5 group-hover:text-pink-600" />
+              )}
+            </div>
+            {likes.length > 0 && (
+              <span
+                className={`group-hover:text-pink-600 text-sm ${
+                  liked && "text-pink-600"
+                }`}
+              >
+                {likes.length}
+              </span>
+            )}
+          </div>
+
+          <div className="icon group">
+            <ShareIcon className="h-5 group-hover:text-[#1d9bf0]" />
+          </div>
+          <div className="icon group">
+            <ChartBarIcon className="h-5 group-hover:text-[#1d9bf0]" />
+          </div>
+        </div>
       </div>
     </div>
   );

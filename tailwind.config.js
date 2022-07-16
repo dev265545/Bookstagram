@@ -1,13 +1,12 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: "class",
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
-  ],
+  mode: "jit",
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
-  plugins: [require("flowbite/plugin")],
+  variants: {
+    extend: {},
+  },
+  plugins: [require("tailwind-scrollbar-hide"), require("tailwind-scrollbar")],
 };
