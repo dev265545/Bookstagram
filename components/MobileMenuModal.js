@@ -17,6 +17,9 @@ export default function Example({ setMenuopen }) {
     <div
       id="medium-modal"
       tabIndex="-1"
+      onClick={(e) => {
+        setMenuopen(false);
+      }}
       className="backdrop-blur overflow-y-auto overflow-x-auto fixed top-0 right-0 left-0 z-50 w-full md:inset-0  md:h-full xl:hidden md:hidden"
     >
       <div className="relative p-4 w-full max-w-lg h-full md:h-auto">
