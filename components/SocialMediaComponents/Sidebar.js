@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { HomeIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 import {
   HashtagIcon,
   BellIcon,
@@ -12,26 +13,32 @@ import {
 } from "@heroicons/react/outline";
 import SidebarLink from "./SidebarLink";
 import { signOut } from "next-auth/react";
-import logo from "../assets/Bookstagram-logos_white.png";
+import logo from "../../assets/Bookstagram-logos_white.png";
 import { useSession } from "next-auth/react";
 
 function Sidebar() {
   const { data: session } = useSession();
-
+  const router = useRouter();
   return (
     <div className="hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2 fixed h-full">
       <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
         <Image src={logo} width={80} height={80} alt="LOGO" />
       </div>
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
-        <SidebarLink text="Home" Icon={HomeIcon} active />
-        <SidebarLink text="Explore" Icon={HashtagIcon} />
-        <SidebarLink text="Notifications" Icon={BellIcon} />
-        <SidebarLink text="Messages" Icon={InboxIcon} />
-        <SidebarLink text="Bookmarks" Icon={BookmarkIcon} />
-        <SidebarLink text="Lists" Icon={ClipboardListIcon} />
-        <SidebarLink text="Profile" Icon={UserIcon} />
-        <SidebarLink text="More" Icon={DotsCircleHorizontalIcon} />
+        <SidebarLink text="Home" Icon={HomeIcon} link="/" active />
+        <SidebarLink text="Explore" Icon={HashtagIcon} link="/Explore" />
+        <SidebarLink
+          text="Notifications"
+          Icon={BellIcon}
+          link="/Notifications"
+        />
+
+        <SidebarLink text="Messages" link="/Explore" Icon={InboxIcon} />
+
+        <SidebarLink text="Bookmarks" link="/Explore" Icon={BookmarkIcon} />
+        <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} />
+        <SidebarLink text="Profile" link="/Profile" Icon={UserIcon} />
+        <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />
       </div>
       <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
         Tweet

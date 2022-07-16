@@ -1,5 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRecoilState } from "recoil";
-import { modalState, postIdState } from "../atoms/modalAtom";
+import { modalState, postIdState } from "../../atoms/modalAtom";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import {
@@ -9,7 +11,7 @@ import {
   collection,
   serverTimestamp,
 } from "@firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { useSession } from "next-auth/react";
 import {
   CalendarIcon,

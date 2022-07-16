@@ -1,10 +1,11 @@
 import { SparklesIcon } from "@heroicons/react/outline";
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
-import Input from "./Input";
+import Input from "../SocialMediaComponents/Input";
+
 import { onSnapshot, collection, query, orderBy } from "@firebase/firestore";
-import { db } from "../firebase";
-import Post from "./Post";
+import { db } from "../../firebase";
+import Post from "../SocialMediaComponents/Post";
 import { useSession } from "next-auth/react";
 import Example from "./MobileMenuModal";
 

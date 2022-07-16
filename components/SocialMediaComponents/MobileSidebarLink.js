@@ -5,7 +5,7 @@ function SidebarLink({ Icon, text, active }) {
   return (
     <div
       className={`text-[#d9d9d9]  p-3 hoverAnimation ${active && "font-bold"}`}
-      onClick={() => active && router.push("/")}
+      onClick={() => active && router.push("/", { text })}
     >
       <Icon className="h-7" />
       <span className="">{text}</span>
