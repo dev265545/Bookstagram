@@ -23,7 +23,7 @@ import {
 import { useRouter } from "next/router";
 import Moment from "react-moment";
 
-function Modal() {
+function Modal({}) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useRecoilState(modalState);
   const [postId, setPostId] = useRecoilState(postIdState);

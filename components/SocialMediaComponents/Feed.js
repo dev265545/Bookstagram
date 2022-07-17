@@ -7,7 +7,7 @@ import { onSnapshot, collection, query, orderBy } from "@firebase/firestore";
 import { db } from "../../firebase";
 import Post from "../SocialMediaComponents/Post";
 import { useSession } from "next-auth/react";
-import Example from "./MobileMenuModal";
+import Sidebar from "./MobileMenuModal";
 
 function Feed() {
   const { data: session } = useSession();
@@ -63,7 +63,10 @@ function Feed() {
           ))}
         </div>
       </div>
-      {menuopen && <Example setMenuopen={setMenuopen} />}
+
+      {menuopen && (
+        <Sidebar className="bg-black w-full h-full" setMenuopen={setMenuopen} />
+      )}
     </>
   );
 }

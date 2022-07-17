@@ -86,6 +86,7 @@ function Post({ id, post, postPage }) {
         <img
           src={post?.userImg}
           alt=""
+          referrerPolicy="no-referrer"
           className="h-11 w-11 rounded-full mr-4"
         />
       )}
