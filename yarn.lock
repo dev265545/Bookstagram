@@ -10,17 +10,12 @@
     "core-js-pure" "^3.20.2"
     "regenerator-runtime" "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.16.3", "@babel/runtime@^7.18.3":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.16.3", "@babel/runtime@^7.18.3":
   "integrity" "sha512-t9wi7/AW6XtKahAe20Yw0/mMljKq0B1r2fPdvaAdV/KPDZewFXdaaa6K7lxmZBZ8FBNpCiAT6iHPmd6QO9bKfQ=="
   "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.18.6.tgz"
   "version" "7.18.6"
   dependencies:
     "regenerator-runtime" "^0.13.4"
-
-"@emoji-mart/data@^1.0.3":
-  "integrity" "sha512-SwxtfLOPiis9iXwWLjZHpUIUwYV/ghfBG6jpVP2HZgCt/dE8Q4r1RQg1Y5TyYBYKk8N5RKuLWJi1DNrEUIWj+A=="
-  "resolved" "https://registry.npmjs.org/@emoji-mart/data/-/data-1.0.3.tgz"
-  "version" "1.0.3"
 
 "@eslint/eslintrc@^1.3.0":
   "integrity" "sha512-UWW0TMTmk2d7hLcWD1/e2g5HDM/HQ3csaLSqXCfqwh4uNDuNqlaKWXmEsL4Cs41Z0KnILNvwbHAah3C2yt06kw=="
@@ -1024,24 +1019,6 @@
   "integrity" "sha512-8nCXyIQY9An88NXAp+PuPy5h3/w5ZY7Iu2lag65Q0XREprcat5F8gKhoHsBUnQcFuCRnmevpR8yEBYRU3d2HDw=="
   "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.192.tgz"
   "version" "1.4.192"
-
-"emoji-mart@^5.1.0":
-  "integrity" "sha512-ytXgeemyw4FormPQqWd35Vh06ZSnQFhVUqW51kASZzzjhQOPSGtiN3VCC7vDq94Pkxmsbet+Gps/qj5N90mEnw=="
-  "resolved" "https://registry.npmjs.org/emoji-mart/-/emoji-mart-5.1.0.tgz"
-  "version" "5.1.0"
-
-"emoji-mart@3.0.1":
-  "integrity" "sha512-sxpmMKxqLvcscu6mFn9ITHeZNkGzIvD0BSNFE/LJESPbCA8s1jM6bCDPjWbV31xHq7JXaxgpHxLB54RCbBZSlg=="
-  "resolved" "https://registry.npmjs.org/emoji-mart/-/emoji-mart-3.0.1.tgz"
-  "version" "3.0.1"
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    "prop-types" "^15.6.0"
-
-"emoji-picker-element@^1.12.1":
-  "integrity" "sha512-F9AY/re8uqZmBcCXLHLGvyy7fxuMQdZl9R8OToLRH8Vnns+WMX8RYUbI2nSJklzl5+82qzpYWeus1/puDepWcQ=="
-  "resolved" "https://registry.npmjs.org/emoji-picker-element/-/emoji-picker-element-1.12.1.tgz"
-  "version" "1.12.1"
 
 "emoji-picker-react@^3.5.1":
   "integrity" "sha512-cuSthFAvUO8Q1N7KJPEgZ7N0JNIWPKgN5GUmKe71UlSD4qFYI/p05RT9nohlWOq6YSFhEy2mI/60zBZiaku4mg=="
@@ -2301,7 +2278,7 @@
   "resolved" "https://registry.npmjs.org/promise-polyfill/-/promise-polyfill-8.1.3.tgz"
   "version" "8.1.3"
 
-"prop-types@^15.6.0", "prop-types@^15.7.0", "prop-types@^15.8.1", "prop-types@>=15.7.2":
+"prop-types@^15.7.0", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -2344,7 +2321,7 @@
   "resolved" "https://registry.npmjs.org/quick-lru/-/quick-lru-5.1.1.tgz"
   "version" "5.1.1"
 
-"react-dom@^16 || ^17 || ^18", "react-dom@^17.0.2 || ^18", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=17.0.x", "react-dom@18.2.0":
+"react-dom@^16 || ^17 || ^18", "react-dom@^17.0.2 || ^18", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@18.2.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -2357,13 +2334,6 @@
   "resolved" "https://registry.npmjs.org/react-firebase-hooks/-/react-firebase-hooks-5.0.3.tgz"
   "version" "5.0.3"
 
-"react-input-emoji@^4.1.0":
-  "integrity" "sha512-iGOEVTUIhu9d9+hswTElqS1t4onjaa88R7on2a2mDHgFdJKIe62EPiAUEAVA9xqLfeSvb4cPjlbGJ4+ydT12rg=="
-  "resolved" "https://registry.npmjs.org/react-input-emoji/-/react-input-emoji-4.1.0.tgz"
-  "version" "4.1.0"
-  dependencies:
-    "emoji-mart" "3.0.1"
-
 "react-is@^16.13.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -2374,7 +2344,7 @@
   "resolved" "https://registry.npmjs.org/react-moment/-/react-moment-1.1.2.tgz"
   "version" "1.1.2"
 
-"react@^0.14.0 || ^15.0.0-0 || ^16.0.0 || ^17.0.0", "react@^16 || ^17 || ^18", "react@^16.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.13.1", "react@>=17.0.x", "react@18.2.0":
+"react@^16 || ^17 || ^18", "react@^16.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.13.1", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

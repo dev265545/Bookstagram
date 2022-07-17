@@ -5,6 +5,7 @@ import Image from "next/image";
 import pic3 from "../assets/vecteezy_the-female-character-she-searched-for-books-to-read-from_5611509.svg";
 import axios from "axios";
 import BookComp from "../components/BookComponents/BookComp";
+import Sidebar from "../components/SocialMediaComponents/Sidebar";
 
 function Search() {
   const [Search, setSearch] = useState("");
