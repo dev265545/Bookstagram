@@ -11,17 +11,16 @@ import {
   DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
-import SidebarLink from "./MobileSidebarLink";
+import SidebarLink from "./SidebarLink";
 import { signOut } from "next-auth/react";
 import logo from "../../assets/Bookstagram-logos_white.png";
 import { useSession } from "next-auth/react";
 
-function Sidebar({ setMenuopen }) {
+function Sidebar() {
   const { data: session } = useSession();
   const router = useRouter();
-
   return (
-    <div className=" sm:flex  sm:w-full flex-col items-center  h-full bg-black">
+    <div className="sm:flex flex-col items-center xl:items-start xl:hidden xl:w-[340px] p-2 fixed h-full bg-black">
       <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
         <Image src={logo} width={80} height={80} alt="LOGO" />
       </div>
@@ -42,7 +41,7 @@ function Sidebar({ setMenuopen }) {
         <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />
       </div>
       <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
-        Tweet
+        Post
       </button>
       <div
         className="text-[#d9d9d9] flex items-center justify-center mt-auto hoverAnimation xl:ml-auto xl:-mr-5"

@@ -41,7 +41,7 @@ function Sidebar() {
         <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />
       </div>
       <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
-        Tweet
+        Post
       </button>
       <div
         className="text-[#d9d9d9] flex items-center justify-center mt-auto hoverAnimation xl:ml-auto xl:-mr-5"

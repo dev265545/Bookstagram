@@ -4,12 +4,17 @@ import Navbar from "../components/BookComponents/Navbar";
 import Image from "next/image";
 import pic3 from "../assets/vecteezy_the-female-character-she-searched-for-books-to-read-from_5611509.svg";
 import axios from "axios";
+import { signOut } from "next-auth/react";
+import { getProviders, getSession, useSession } from "next-auth/react";
 import BookComp from "../components/BookComponents/BookComp";
-import Sidebar from "../components/SocialMediaComponents/Sidebar";
+import Login from "../components/SocialMediaComponents/Login";
 
-function Search() {
+function Search({ providers }) {
+  const { data: session } = useSession();
+
   const [Search, setSearch] = useState("");
   const [BookData, setBookData] = useState([]);
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     axios
@@ -21,7 +26,7 @@ function Search() {
       .then((res) => setBookData(res.data.items))
       .catch((err) => console.log(err));
   };
-
+  if (!session) return <Login providers={providers} />;
   return (
     <>
       <section className="w-full h-full bg-blue-200  ">
@@ -89,3 +94,15 @@ function Search() {
 }
 
 export default Search;
+
+export async function getServerSideProps(context) {
+  const providers = await getProviders();
+  const session = await getSession(context);
+
+  return {
+    props: {
+      providers,
+      session,
+    },
+  };
+}

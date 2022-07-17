@@ -1,13 +1,15 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import logo from "../../assets/Man_reading_book_character_illustration.svg";
 
 function Login({ providers }) {
   return (
-    <div className="flex flex-col items-center space-y-20 pt-48 bg-black">
+    <div className="flex flex-col items-center space-y-1 pt-48 bg-black">
       <Image
-        src="https://rb.gy/ogau5a"
-        width={150}
-        height={150}
+        src={logo}
+        width={450}
+        height={450}
+        layout="fixed"
         objectFit="contain"
         alt="LOGO"
       />

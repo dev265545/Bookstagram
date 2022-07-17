@@ -159,7 +159,7 @@ function Input() {
               disabled={!input && !selectedFile}
               onClick={sendPost}
             >
-              Tweet
+              Post
             </button>
           </div>
         )}

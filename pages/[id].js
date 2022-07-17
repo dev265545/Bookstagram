@@ -54,7 +54,7 @@ function PostPage({ trendingResults, followResults, providers }) {
     <div>
       <Head>
         <title>
-          {post?.username} on Twitter: {post?.text}
+          {post?.username} on Bookstagram: {post?.text}
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -68,7 +68,7 @@ function PostPage({ trendingResults, followResults, providers }) {
             >
               <ArrowLeftIcon className="h-5 text-white" />
             </div>
-            Tweet
+            Share
           </div>
 
           <Post id={id} post={post} postPage />
