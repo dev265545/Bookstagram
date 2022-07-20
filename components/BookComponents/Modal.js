@@ -1,4 +1,20 @@
-/* eslint-disable @next/next/no-img-element */
+import { db, storage } from "../../firebase";
+import {
+  onSnapshot,
+  query,
+  where,
+  setDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
+import { signOut, useSession } from "next-auth/react";
+
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  updateDoc,
+} from "@firebase/firestore";
 const Modal = ({
   visible,
   modalbook,
@@ -9,9 +25,25 @@ const Modal = ({
   description,
   authors,
   amount,
+  id,
 }) => {
   const handleOnclose = () => {
     onClose();
+  };
+  const { data: session } = useSession();
+
+  const addfavourite = async () => {
+    const docRef = await addDoc(collection(db, "books"), {
+      id: id,
+      user_id: session.user.uid,
+      username: session.user.name,
+      userImg: session.user.image,
+      tag: session.user.tag,
+      book_name: title,
+      book_img: thumbnail,
+      book_authors: authors,
+      book_infolink: infoLink,
+    });
   };
 
   if (!visible) {
@@ -57,7 +89,15 @@ const Modal = ({
                       {" "}
                       More Info
                     </a>
+                    <button
+                      onClick={addfavourite}
+                      type="button"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Add to Favourites
+                    </button>
                   </div>
+                  <div></div>
                 </div>
 
                 <div className=" ">

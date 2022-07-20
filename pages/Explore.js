@@ -26,6 +26,7 @@ function Search({ providers }) {
       .then((res) => setBookData(res.data.items))
       .catch((err) => console.log(err));
   };
+
   if (!session) return <Login providers={providers} />;
   return (
     <>
@@ -84,6 +85,7 @@ function Search({ providers }) {
                 publishedDate={book.volumeInfo.publishedDate}
                 thumbnail={book.volumeInfo.imageLinks?.smallThumbnail}
                 description={book.volumeInfo.description}
+                etag={book.id}
               />
             </>
           ))}
