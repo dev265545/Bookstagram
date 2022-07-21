@@ -23,7 +23,7 @@ import { useEffect } from "react";
 export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useRecoilState(modalState);
-
+  console.log(trendingResults);
   if (!session) return <Login providers={providers} />;
 
   let users = [];
@@ -68,9 +68,9 @@ export default function Home({ trendingResults, followResults, providers }) {
 }
 
 export async function getServerSideProps(context) {
-  const trendingResults = await fetch("https://jsonkeeper.com/b/NKEV").then(
-    (res) => res.json()
-  );
+  const trendingResults = await fetch(
+    "https://newsapi.org/v2/everything?q=books&apiKey=fc148f9a798147d9a11ec0397cbe8577"
+  ).then((res) => res.json());
   const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
     (res) => res.json()
   );

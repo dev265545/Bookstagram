@@ -36,7 +36,7 @@ function Sidebar() {
 
         <SidebarLink text="Messages" link="/Explore" Icon={InboxIcon} />
 
-        <SidebarLink text="Bookmarks" link="/Explore" Icon={BookmarkIcon} />
+        <SidebarLink text="Favourite Books" link="" Icon={BookmarkIcon} />
         <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} />
         <SidebarLink text="Profile" link="/Profile" Icon={UserIcon} />
         <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />

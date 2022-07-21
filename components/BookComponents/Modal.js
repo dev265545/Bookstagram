@@ -6,8 +6,10 @@ import {
   setDoc,
   doc,
   getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import { signOut, useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
 
 import {
   addDoc,
@@ -31,19 +33,39 @@ const Modal = ({
     onClose();
   };
   const { data: session } = useSession();
+  const [likes, setLikes] = useState([]);
+  const [liked, setLiked] = useState(false);
+  useEffect(
+    () =>
+      onSnapshot(
+        collection(db, "users", session.user.uid, "books"),
+        (snapshot) => setLikes(snapshot.docs)
+      ),
+    [db, id]
+  );
+  console.log(likes);
 
-  const addfavourite = async () => {
-    const docRef = await addDoc(collection(db, "books"), {
-      id: id,
-      user_id: session.user.uid,
-      username: session.user.name,
-      userImg: session.user.image,
-      tag: session.user.tag,
-      book_name: title,
-      book_img: thumbnail,
-      book_authors: authors,
-      book_infolink: infoLink,
-    });
+  useEffect(
+    () => setLiked(likes.findIndex((like) => like.id === id) !== -1),
+    [likes]
+  );
+  console.log(liked);
+  const addTofavourite = async () => {
+    if (liked) {
+      await deleteDoc(doc(db, "users", session.user.uid, "books", id));
+    } else {
+      await setDoc(doc(db, "users", session.user.uid, "books", id), {
+        id: id,
+        user_id: session.user.uid,
+        username: session.user.name,
+        userImg: session.user.image,
+        tag: session.user.tag,
+        book_name: title,
+        book_img: thumbnail,
+        book_authors: authors,
+        book_infolink: infoLink,
+      });
+    }
   };
 
   if (!visible) {
@@ -89,13 +111,30 @@ const Modal = ({
                       {" "}
                       More Info
                     </a>
-                    <button
-                      onClick={addfavourite}
-                      type="button"
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      Add to Favourites
-                    </button>
+                    {liked && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addTofavourite();
+                        }}
+                        type="button"
+                        className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+                      >
+                        <p>Remove from Favourites</p>
+                      </button>
+                    )}
+                    {liked == false && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addTofavourite();
+                        }}
+                        type="button"
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        <p>Add to Favourites</p>
+                      </button>
+                    )}
                   </div>
                   <div></div>
                 </div>

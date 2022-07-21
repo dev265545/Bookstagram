@@ -76,13 +76,13 @@ const BookComp = ({
           {thumbnail && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              className="  w-full h-full md:h-auto object-none md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+              className="  md:h-auto object-none md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
               src={thumbnailDisplay}
               alt="not available"
             />
           )}
 
-          <div className="p-6 flex flex-col justify-start">
+          <div className="p-2 flex flex-col justify-start">
             <h5 className="text-gray-100 text-xl font-medium mb-2">
               {titleDisplay}
             </h5>
