@@ -18,7 +18,7 @@ import { useSession } from "next-auth/react";
 
 function Sidebar() {
   const { data: session } = useSession();
-  console.log(logo);
+
   const router = useRouter();
   return (
     <div className="hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2 fixed h-full">
@@ -28,16 +28,16 @@ function Sidebar() {
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
         <SidebarLink text="Home" Icon={HomeIcon} link="/" active />
         <SidebarLink text="Explore" Icon={HashtagIcon} link="/Explore" />
+        {/* <SidebarLink text="Notifications"Icon={BellIcon} link="/Notifications"/>
+
+        <SidebarLink text="Messages" link="/Explore" Icon={InboxIcon} /> */}
+
         <SidebarLink
-          text="Notifications"
-          Icon={BellIcon}
-          link="/Notifications"
+          text="Favourite Books"
+          link="/FavBooks"
+          Icon={BookmarkIcon}
         />
-
-        <SidebarLink text="Messages" link="/Explore" Icon={InboxIcon} />
-
-        <SidebarLink text="Favourite Books" link="" Icon={BookmarkIcon} />
-        <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} />
+        {/* <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} /> */}
         <SidebarLink text="Profile" link="/Profile" Icon={UserIcon} />
         <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />
       </div>

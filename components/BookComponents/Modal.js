@@ -43,13 +43,11 @@ const Modal = ({
       ),
     [db, id]
   );
-  console.log(likes);
 
   useEffect(
     () => setLiked(likes.findIndex((like) => like.id === id) !== -1),
     [likes]
   );
-  console.log(liked);
   const addTofavourite = async () => {
     if (liked) {
       await deleteDoc(doc(db, "users", session.user.uid, "books", id));

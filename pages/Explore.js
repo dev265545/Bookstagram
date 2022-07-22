@@ -8,6 +8,12 @@ import { signOut } from "next-auth/react";
 import { getProviders, getSession, useSession } from "next-auth/react";
 import BookComp from "../components/BookComponents/BookComp";
 import Login from "../components/SocialMediaComponents/Login";
+const navigation = [
+  { name: "Feed", href: "/", current: false },
+  { name: "Explore", href: "/Explore", current: true },
+  { name: "Favourite Books", href: "/FavBooks", current: false },
+  // { name: "Calendar", href: "#", current: false },
+];
 
 function Search({ providers }) {
   const { data: session } = useSession();
@@ -32,7 +38,7 @@ function Search({ providers }) {
     <>
       <section className="w-full h-full bg-blue-200  ">
         <div>
-          <Navbar />
+          <Navbar navigation={navigation} />
         </div>
         <div>
           <div className="grid place-items-center">

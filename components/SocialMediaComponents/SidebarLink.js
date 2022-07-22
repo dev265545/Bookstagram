@@ -11,7 +11,6 @@ function SidebarLink({ Icon, text, active, link }) {
       }`}
       onClick={(e) => {
         router.push(link);
-        console.log("hello");
       }}
     >
       <Icon className="h-7" />

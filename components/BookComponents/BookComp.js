@@ -65,8 +65,6 @@ const BookComp = ({
         favouriteBooks.push({ ...doc.data(), id: doc.id });
       });
     });
-
-    console.log(favouriteBooks);
   };
 
   return (

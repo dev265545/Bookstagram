@@ -42,6 +42,7 @@ function Feed() {
       ),
     [db]
   );
+  console.log(posts);
 
   return (
     <>

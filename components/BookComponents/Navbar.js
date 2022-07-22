@@ -7,18 +7,11 @@ import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const navigation = [
-  { name: "Explore", href: "/", current: false },
-  { name: "Feed", href: "/Explore", current: true },
-  { name: "Favourite Books", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar(navigation) {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -50,7 +43,7 @@ export default function Navbar() {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
+                    {navigation.navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -113,7 +106,7 @@ export default function Navbar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
+              {navigation.navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
