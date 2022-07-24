@@ -28,24 +28,27 @@ function FavBooks({ providers }) {
       ),
     [db]
   );
-  console.log(favbooks);
+  let data = favbooks.map((favbook) => favbook.data());
 
   if (!session) return <Login providers={providers} />;
   return (
     <>
       <Navbar navigation={navigation} />
       <div className="pb-72 text-white bg-slate-500">
-        {favbooks.map((favbook) => (
-          <BookComp
-            subtitle={""}
-            infoLink={favbook.data().book_infoLink}
-            title={favbook.data().book_name}
-            authors={favbook.data().book_authors}
-            thumbnail={favbook.data().book_img}
-            etag={favbook.data().id}
-            key={favbook.data().id}
-          />
-        ))}
+        <div className="grid grid-cols-3">
+          {data.map((favbook) => (
+            <BookComp
+              subtitle={""}
+              infoLink={favbook.book_infolink}
+              title={favbook.book_name}
+              amount={456}
+              authors={favbook.book_authors}
+              thumbnail={favbook.book_img}
+              etag={favbook.id}
+              key={favbook.id}
+            />
+          ))}
+        </div>
       </div>
     </>
   );

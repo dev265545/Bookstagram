@@ -79,7 +79,7 @@ function Search({ providers }) {
             </div>
           </form>
         </div>
-        <div className="grid lg:grid-cols-3">
+        <div className="grid grid-cols-3">
           {BookData?.map((book) => (
             <>
               <BookComp

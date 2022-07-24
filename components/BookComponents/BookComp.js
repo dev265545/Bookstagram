@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Modal from "./Modal";
 import isUndefined from "./Undefined";
@@ -69,27 +70,26 @@ const BookComp = ({
 
   return (
     <>
-      <div className="flex justify-center p-6">
-        <div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-gray-800 shadow-lg">
-          {thumbnail && (
-            // eslint-disable-next-line @next/next/no-img-element
+      <div className="justify-center p-2 rounded-lg">
+        <div className="relative flex flex-col  md:flex-row  rounded-lg shadow-lg max-w-xs md:max-w-3xl mx-auto border border-white bg-gray-700">
+          <div className="w-full md:w-1/3 bg-gray-700 grid rounded-lg r p-2">
             <img
-              className="  md:h-auto object-none md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
               src={thumbnailDisplay}
-              alt="not available"
+              alt="tailwind logo"
+              className="rounded-xl"
             />
-          )}
-
-          <div className="p-2 flex flex-col justify-start">
-            <h5 className="text-gray-100 text-xl font-medium mb-2">
+          </div>
+          <div className="w-full md:w-2/3 bg-gray-700 rounded-lg flex flex-col space-y-2 p-3">
+            <h3 className="font-black text-gray-200 md:text-2xl text-xl">
               {titleDisplay}
-            </h5>
-            <p className="text-gray-100 text-base mb-4">{subtitle}</p>
-            <p className="text-gray-100 text-base">{authorDisplay}</p>
-            <p className="text-gray-100 text-base mb-4">
-              {" "}
-              Price: &#8377;{amount}
+            </h3>
+
+            <p className="md:text-lg text-gray-100 text-base">
+              {authorDisplay}
             </p>
+            <p className="text  text-gray-200">{subtitle}</p>
+            <p className="text  text-gray-200">Price: &#8377;{amount}</p>
+
             <div className="flex space-x-2 justify-center">
               <button
                 className="bg-blue-200 text-black active:bg-blue-500 
@@ -102,18 +102,20 @@ const BookComp = ({
               >
                 Click here
               </button>
-              <Modal
-                title={titleDisplay}
-                id={etag}
-                authors={authors}
-                description={description}
-                visible={showModal}
-                modalbook={bookitem}
-                thumbnail={thumbnailDisplay}
-                amount={amount}
-                onClose={handleOnclose}
-                infoLink={infoLink}
-              />
+              <div className=" z-50">
+                <Modal
+                  title={titleDisplay}
+                  id={etag}
+                  authors={authors}
+                  description={description}
+                  visible={showModal}
+                  modalbook={bookitem}
+                  thumbnail={thumbnailDisplay}
+                  amount={amount}
+                  onClose={handleOnclose}
+                  infoLink={infoLink}
+                />
+              </div>
             </div>
           </div>
         </div>

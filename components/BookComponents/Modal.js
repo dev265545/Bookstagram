@@ -33,23 +33,23 @@ const Modal = ({
     onClose();
   };
   const { data: session } = useSession();
-  const [likes, setLikes] = useState([]);
-  const [liked, setLiked] = useState(false);
+  const [books, setbooks] = useState([]);
+  const [bookF, setbookF] = useState(false);
   useEffect(
     () =>
       onSnapshot(
         collection(db, "users", session.user.uid, "books"),
-        (snapshot) => setLikes(snapshot.docs)
+        (snapshot) => setbooks(snapshot.docs)
       ),
     [db, id]
   );
 
   useEffect(
-    () => setLiked(likes.findIndex((like) => like.id === id) !== -1),
-    [likes]
+    () => setbookF(books.findIndex((book) => book.id === id) !== -1),
+    [books]
   );
   const addTofavourite = async () => {
-    if (liked) {
+    if (bookF) {
       await deleteDoc(doc(db, "users", session.user.uid, "books", id));
     } else {
       await setDoc(doc(db, "users", session.user.uid, "books", id), {
@@ -109,7 +109,7 @@ const Modal = ({
                       {" "}
                       More Info
                     </a>
-                    {liked && (
+                    {bookF && (
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -121,7 +121,7 @@ const Modal = ({
                         <p>Remove from Favourites</p>
                       </button>
                     )}
-                    {liked == false && (
+                    {bookF == false && (
                       <button
                         onClick={(e) => {
                           e.stopPropagation();

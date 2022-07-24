@@ -23,7 +23,7 @@ import { useEffect } from "react";
 export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useRecoilState(modalState);
-  console.log(trendingResults);
+
   if (!session) return <Login providers={providers} />;
 
   let users = [];
@@ -38,6 +38,7 @@ export default function Home({ trendingResults, followResults, providers }) {
   if (users.length == 0) {
     setDoc(doc(userRef, session.user.uid), {
       id: session.user.uid,
+      tag: session.user.tag,
       username: session.user.name,
       userImg: session.user.image,
       email: session.user.email,
