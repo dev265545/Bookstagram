@@ -35,7 +35,7 @@ function FavBooks({ providers }) {
     <>
       <Navbar navigation={navigation} />
       <div className="pb-72 text-white bg-slate-500">
-        <div className="grid grid-cols-3">
+        <div className="grid xl:grid-cols-3">
           {data.map((favbook) => (
             <BookComp
               subtitle={""}

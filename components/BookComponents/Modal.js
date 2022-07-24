@@ -1,25 +1,13 @@
-import { db, storage } from "../../firebase";
-import {
-  onSnapshot,
-  query,
-  where,
-  setDoc,
-  doc,
-  getDocs,
-  deleteDoc,
-} from "firebase/firestore";
-import { signOut, useSession } from "next-auth/react";
+/* eslint-disable @next/next/no-img-element */
+import { db } from "../../firebase";
+import { onSnapshot, setDoc, doc, deleteDoc } from "firebase/firestore";
+import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 
-import {
-  addDoc,
-  collection,
-  serverTimestamp,
-  updateDoc,
-} from "@firebase/firestore";
+import { collection } from "@firebase/firestore";
 const Modal = ({
   visible,
-  modalbook,
+
   thumbnail,
   onClose,
   title,
@@ -41,12 +29,12 @@ const Modal = ({
         collection(db, "users", session.user.uid, "books"),
         (snapshot) => setbooks(snapshot.docs)
       ),
-    [db, id]
+    [id, session.user.uid]
   );
 
   useEffect(
     () => setbookF(books.findIndex((book) => book.id === id) !== -1),
-    [books]
+    [books, id]
   );
   const addTofavourite = async () => {
     if (bookF) {
