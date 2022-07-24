@@ -27,18 +27,22 @@ function Sidebar() {
       </div>
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
         <SidebarLink text="Home" Icon={HomeIcon} link="/" active />
-        <SidebarLink text="Explore" Icon={HashtagIcon} link="/Explore" />
+        <SidebarLink text="Explore" Icon={HashtagIcon} link="Explore" />
         {/* <SidebarLink text="Notifications"Icon={BellIcon} link="/Notifications"/>
 
         <SidebarLink text="Messages" link="/Explore" Icon={InboxIcon} /> */}
 
         <SidebarLink
           text="Favourite Books"
-          link="/FavBooks"
+          link="FavBooks"
           Icon={BookmarkIcon}
         />
         {/* <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} /> */}
-        <SidebarLink text="Profile" link="/Profile" Icon={UserIcon} />
+        <SidebarLink
+          text="Profile"
+          link={`/profile/${session.user.uid}`}
+          Icon={UserIcon}
+        />
         <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />
       </div>
       <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">

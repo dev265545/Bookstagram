@@ -32,7 +32,7 @@ function Widgets({ trendingResults, followResults }) {
   );
 
   data = data.filter(isNaN);
-  console.log(trendingResults.article);
+
   return (
     <div className="hidden lg:inline ml-8 xl:w-[450px] py-1 space-y-5">
       <div className="sticky top-0 py-1.5 bg-black z-50 w-11/12 xl:w-9/12">
@@ -49,7 +49,7 @@ function Widgets({ trendingResults, followResults }) {
       <div className="text-[#d9d9d9] space-y-3 bg-[#15181c] pt-2 rounded-xl w-11/12 xl:w-9/12">
         <h4 className="font-bold text-xl px-4">Whats happening</h4>
         <AnimatePresence>
-          {trendingResults.articles.slice(0, articleNum).map((article) => (
+          {trendingResults?.articles?.slice(0, articleNum).map((article) => (
             <motion.div
               key={article.title}
               initial={{ opacity: 0 }}
