@@ -29,7 +29,7 @@ const Modal = ({
         collection(db, "users", session.user.uid, "books"),
         (snapshot) => setbooks(snapshot.docs)
       ),
-    [id, session.user.uid]
+    [session.user.uid]
   );
 
   useEffect(

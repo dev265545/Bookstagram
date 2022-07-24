@@ -3,7 +3,6 @@ import { onSnapshot, collection, query, orderBy } from "@firebase/firestore";
 import { db } from "../firebase";
 import Navbar from "../components/BookComponents/Navbar";
 
-import { signOut } from "next-auth/react";
 import { getProviders, getSession, useSession } from "next-auth/react";
 import BookComp from "../components/BookComponents/BookComp";
 import Login from "../components/SocialMediaComponents/Login";

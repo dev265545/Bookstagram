@@ -6,8 +6,8 @@ import { getProviders, getSession, useSession } from "next-auth/react";
 import Login from "../components/SocialMediaComponents/Login";
 import Modal from "../components/SocialMediaComponents/Modal";
 import { modalState } from "../atoms/modalAtom";
-import { Snapshot, useRecoilState } from "recoil";
-import { db, storage } from "../firebase";
+import { useRecoilState } from "recoil";
+import { db } from "../firebase";
 import {
   collection,
   onSnapshot,
