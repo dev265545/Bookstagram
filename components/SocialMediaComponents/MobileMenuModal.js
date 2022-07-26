@@ -37,7 +37,11 @@ function Sidebar() {
 
         <SidebarLink text="Bookmarks" link="/FavBooks" Icon={BookmarkIcon} />
         {/* <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} /> */}
-        <SidebarLink text="Profile" link="/Profile" Icon={UserIcon} />
+        <SidebarLink
+          text="Profile"
+          link={`/Profile/${session.user.uid}`}
+          Icon={UserIcon}
+        />
         <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />
       </div>
       <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
