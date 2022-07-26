@@ -182,7 +182,7 @@ function ProfileComp({ data }) {
                     subtitle={""}
                     infoLink={favbook.book_infolink}
                     title={favbook.book_name}
-                    amount={456}
+                    amount={favbook?.book_price}
                     authors={favbook.book_authors}
                     thumbnail={favbook.book_img}
                     etag={favbook.id}

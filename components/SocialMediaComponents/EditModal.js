@@ -39,8 +39,6 @@ function EditModal({ user }) {
   const [nameinput, setNameInput] = useState(user[0].username);
   const [bioinput, setBioInput] = useState(user[0].bio);
 
-  console.log(nameinput);
-
   const sendPost = async () => {
     if (loading) return;
     setLoading(true);
@@ -106,16 +104,26 @@ function EditModal({ user }) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-black rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
+            <div className="inline-block modal-dialog modal-dialog-scrollable 	overflow-y-scroll align-bottom bg-black rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
               <div className="flex items-center text-white text-xl px-2 gap-3 py-2 border-b border-gray-700">
                 <div
-                  className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0"
+                  className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0 "
                   onClick={() => setEditModal(false)}
                 >
                   <XIcon className="h-[22px] text-white" />
                 </div>
                 Edit Profile
+                <button
+                  className="    flex-auto bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default"
+                  disabled={!nameinput && !selectedFile}
+                  onClick={() => {
+                    sendPost();
+                  }}
+                >
+                  Save
+                </button>
               </div>
+
               <div className="flex px-4 pt-5 pb-2.5 sm:px-6">
                 <div className="w-full">
                   <div className=" w-full h-1/3 flex ">
@@ -132,7 +140,7 @@ function EditModal({ user }) {
                       />
                     </div>
                   </div>
-                  <div className=" text-white mt-5 mb-3 md:w-96 xl:w-96">
+                  <div className=" text-white mt-2 mb-3 md:w-96 xl:w-96">
                     Username :
                     <input
                       onChange={(e) => {
@@ -159,7 +167,7 @@ function EditModal({ user }) {
                       value={nameinput}
                     />
                   </div>
-                  <div className=" text-white mt-5 mb-3 md:w-96 xl:w-96">
+                  <div className=" text-white mt-3 mb-3 md:w-96 xl:w-96">
                     Bio :
                     <input
                       onChange={(e) => {
@@ -188,15 +196,6 @@ function EditModal({ user }) {
                   </div>
                 </div>
               </div>
-              <button
-                className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default"
-                disabled={!nameinput && !selectedFile}
-                onClick={() => {
-                  sendPost();
-                }}
-              >
-                Save
-              </button>
             </div>
           </Transition.Child>
         </div>

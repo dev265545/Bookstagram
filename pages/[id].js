@@ -27,7 +27,6 @@ function PostPage({ trendingResults, followResults, providers }) {
   const [comments, setComments] = useState([]);
   const router = useRouter();
   const { id } = router.query;
-  console.log(1);
 
   useEffect(
     () =>

@@ -17,6 +17,9 @@ const Modal = ({
   amount,
   id,
 }) => {
+  if (amount == undefined) {
+    amount = "Not Available";
+  }
   const handleOnclose = () => {
     onClose();
   };
@@ -48,6 +51,7 @@ const Modal = ({
         tag: session.user.tag,
         book_name: title,
         book_img: thumbnail,
+        book_price: amount,
         book_authors: authors,
         book_infolink: infoLink,
       });

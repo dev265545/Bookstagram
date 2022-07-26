@@ -9,9 +9,11 @@ import {
 } from "@firebase/firestore";
 import { db } from "../../firebase";
 import { getProviders, getSession, useSession } from "next-auth/react";
+import { Router, useRouter } from "next/router";
 
 function Follow({ user }) {
   const { data: session } = useSession();
+  const router = useRouter();
   const [following, setfollowing] = useState([]);
   const [currentfollowing, setcurrentfollowing] = useState(false);
   useEffect(
@@ -57,6 +59,7 @@ function Follow({ user }) {
     <div
       className="hover:bg-white hover:bg-opacity-[0.03] px-4 py-2 cursor-pointer transition duration-200 ease-out flex items-center"
       key={user.id}
+      onClick={() => router.push(`/Profile/${user.id}`)}
     >
       <img
         alt="hello"
