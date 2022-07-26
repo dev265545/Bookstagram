@@ -34,12 +34,15 @@ function Input() {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, "posts"), {
-      id: session.user.uid,
+      user_id: session.user.uid,
       username: session.user.name,
       userImg: session.user.image,
       tag: session.user.tag,
       text: input,
       timestamp: serverTimestamp(),
+    });
+    await updateDoc(doc(db, "posts", docRef.id), {
+      id: docRef.id,
     });
 
     const imageRef = ref(storage, `posts/${docRef.id}/image`);
@@ -71,9 +74,10 @@ function Input() {
   };
 
   const addEmoji = (event, emojiObject) => {
-    setChosenEmoji(emojiObject);
-
-    setInput(input + chosenEmoji.emoji);
+    if (emojiObject != undefined) {
+      setChosenEmoji(emojiObject.emoji);
+      setInput(input + chosenEmoji);
+    }
   };
 
   return (

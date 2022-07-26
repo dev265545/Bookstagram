@@ -78,16 +78,14 @@ function Post({ id, post, postPage }) {
   };
 
   return (
-    <div
-      className="p-3 flex cursor-pointer border-b border-gray-700"
-      onClick={() => router.push(`/${id}`)}
-    >
+    <div className="p-3 flex cursor-pointer border-b border-gray-700">
       {!postPage && (
         <img
           src={post?.userImg}
           alt=""
           referrerPolicy="no-referrer"
           className="h-11 w-11 rounded-full mr-4"
+          onClick={() => router.push(`/Profile/${post.user_id}`)}
         />
       )}
       <div className="flex flex-col space-y-2 w-full">
@@ -95,6 +93,7 @@ function Post({ id, post, postPage }) {
           {postPage && (
             <img
               src={post?.userImg}
+              onClick={() => router.push(`/Profile/${post.user_id}`)}
               alt="Profile Pic"
               className="h-11 w-11 rounded-full mr-4"
             />
@@ -102,6 +101,7 @@ function Post({ id, post, postPage }) {
           <div className="text-[#6e767d]">
             <div className="inline-block group">
               <h4
+                onClick={() => router.push(`/Profile/${post.user_id}`)}
                 className={`font-bold text-[15px] sm:text-base text-[#d9d9d9] group-hover:underline ${
                   !postPage && "inline-block"
                 }`}
@@ -119,19 +119,31 @@ function Post({ id, post, postPage }) {
               <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
             </span>
             {!postPage && (
-              <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">
+              <p
+                onClick={() => router.push(`/${id}`)}
+                className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5"
+              >
                 {post?.text}
               </p>
             )}
           </div>
-          <div className="icon group flex-shrink-0 ml-auto">
+          <div
+            onClick={() => router.push(`/${id}`)}
+            className="icon group flex-shrink-0 ml-auto"
+          >
             <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
           </div>
         </div>
         {postPage && (
-          <p className="text-[#d9d9d9] mt-0.5 text-xl">{post?.text}</p>
+          <p
+            onClick={() => router.push(`/${id}`)}
+            className="text-[#d9d9d9] mt-0.5 text-xl"
+          >
+            {post?.text}
+          </p>
         )}
         <img
+          onClick={() => router.push(`/${id}`)}
           src={post?.image}
           alt=""
           className="rounded-2xl max-h-[700px] object-cover mr-2"
@@ -159,7 +171,7 @@ function Post({ id, post, postPage }) {
             )}
           </div>
 
-          {session.user.uid === post?.id ? (
+          {session.user.uid === post?.user_id ? (
             <div
               className="flex items-center space-x-1 group"
               onClick={(e) => {

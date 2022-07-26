@@ -17,34 +17,42 @@ import {
   doc,
   getDocs,
   serverTimestamp,
+  addDoc,
 } from "firebase/firestore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import background from "../assets/background.jpg";
 
-export default function Home({ trendingResults, followResults, providers }) {
+export default function Home({ trendingResults, providers }) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [userset, setUserSet] = useState([]);
+  useEffect(
+    () =>
+      onSnapshot(query(collection(db, "users")), (snapshot) => {
+        setUserSet(snapshot.docs);
+      }),
+    [db]
+  );
 
   if (!session) return <Login providers={providers} />;
-
-  let users = [];
   const userRef = collection(db, "users");
-  const q = query(userRef, where("id", "==", session.user.uid));
-  onSnapshot(q, (snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      users.push({ ...doc.data(), id: doc.id });
-    });
-  });
+  let x = [];
 
-  if (users.length == 0) {
-    setDoc(doc(userRef, session.user.uid), {
+  let data = userset.map((user) => user.id == session.user.uid && user.data());
+  data = data.filter(isNaN);
+  console.log(data);
+  if ((data.length = 0)) {
+    setDoc(doc(data, session.user.uid), {
       id: session.user.uid,
       tag: session.user.tag,
       username: session.user.name,
       userImg: session.user.image,
       email: session.user.email,
-
+      coverphoto: "https://i.im.ge/2022/07/26/FLevID.jpg",
+      bio: "",
       timestamp: serverTimestamp(),
     });
+    console.log("success");
   }
 
   return (
@@ -57,10 +65,7 @@ export default function Home({ trendingResults, followResults, providers }) {
       <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
         <Sidebar />
         <Feed />
-        <Widgets
-          trendingResults={trendingResults}
-          followResults={followResults}
-        />
+        <Widgets trendingResults={trendingResults} />
 
         {isOpen && <Modal />}
       </main>
@@ -72,16 +77,14 @@ export async function getServerSideProps(context) {
   const trendingResults = await fetch(
     "https://newsapi.org/v2/everything?q=books&apiKey=fc148f9a798147d9a11ec0397cbe8577"
   ).then((res) => res.json());
-  const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
-    (res) => res.json()
-  );
+
   const providers = await getProviders();
   const session = await getSession(context);
 
   return {
     props: {
       trendingResults,
-      followResults,
+
       providers,
       session,
     },

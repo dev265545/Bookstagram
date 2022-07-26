@@ -5,8 +5,9 @@ import Widgets from "../../components/SocialMediaComponents/Widgets";
 import { getProviders, getSession, useSession } from "next-auth/react";
 import Login from "../../components/SocialMediaComponents/Login";
 import Modal from "../../components/SocialMediaComponents/Modal";
-import { modalState } from "../../atoms/modalAtom";
+import { editmodalState, modalState } from "../../atoms/modalAtom";
 import { useRecoilState } from "recoil";
+import Router from "next/router";
 import { db } from "../../firebase";
 import { useRouter } from "next/router";
 import {
@@ -22,6 +23,8 @@ import {
 import { useEffect, useState } from "react";
 import ProfileComp from "../../components/SocialMediaComponents/ProfileComp";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
+import Loader from "../../components/SocialMediaComponents/Loader";
+import EditModal from "../../components/SocialMediaComponents/EditModal";
 
 export default function ProfilePage({
   trendingResults,
@@ -30,41 +33,49 @@ export default function ProfilePage({
 }) {
   const { data: session } = useSession();
   const [user, setUser] = useState();
-  //const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [userset, setUserSet] = useState([]);
+  const [isowner, setIsOwner] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [editmodal, setEditModal] = useRecoilState(editmodalState);
+  const router = useRouter();
+  const id = router.query.profileid;
+
+  useEffect(
+    () =>
+      onSnapshot(query(collection(db, "users")), (snapshot) => {
+        setUserSet(snapshot.docs);
+      }),
+    [db]
+  );
+
+  let data = userset.map((user) => user.data().id == id && user.data());
+
+  data = data.filter(isNaN);
 
   if (!session) return <Login providers={providers} />;
-
-  let users = [];
-
-  const userRef = collection(db, "users");
-  const q = query(userRef, where("id", "==", session.user.uid));
-  onSnapshot(q, (snapshot) => {
-    setUser(snapshot.docs);
-  });
 
   return (
     <div className="">
       <Head>
-        <title> on Bookstagram</title>
+        <title> Profile|Bookstagram </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
         <Sidebar />
-        <div className="flex-grow border-l border-r border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
-          <div className="flex items-center px-1.5 py-2 border-b border-gray-700 text-[#d9d9d9] font-semibold text-xl gap-x-4 sticky top-0 z-50 bg-black">
-            <div
-              className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0"
-              onClick={() => router.push("/")}
-            >
-              <ArrowLeftIcon className="h-5 text-white" />
-            </div>
+        {data[0] !== undefined ? (
+          <ProfileComp data={data} />
+        ) : (
+          <div className="flex-grow border-l border-r border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
+            {" "}
+            <Loader />
           </div>
-        </div>
-
+        )}
         <Widgets
           trendingResults={trendingResults}
           followResults={followResults}
         />
+        {isOpen && <Modal />}
+        {editmodal && <EditModal user={data} />}
       </main>
     </div>
   );

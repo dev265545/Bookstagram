@@ -27,7 +27,7 @@ function Sidebar() {
       </div>
       <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
         <SidebarLink text="Home" Icon={HomeIcon} link="/" active />
-        <SidebarLink text="Explore" Icon={HashtagIcon} link="Explore" />
+        <SidebarLink text="Explore" Icon={HashtagIcon} link="/Explore" />
         {/* <SidebarLink text="Notifications"Icon={BellIcon} link="/Notifications"/>
 
         <SidebarLink text="Messages" link="/Explore" Icon={InboxIcon} /> */}
@@ -40,7 +40,7 @@ function Sidebar() {
         {/* <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} /> */}
         <SidebarLink
           text="Profile"
-          link={`/profile/${session.user.uid}`}
+          link={`/Profile/${session.user.uid}`}
           Icon={UserIcon}
         />
         <SidebarLink text="More" link="/More" Icon={DotsCircleHorizontalIcon} />
