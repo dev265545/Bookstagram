@@ -1,8 +1,11 @@
+import { collection } from "firebase/firestore";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import logo from "../../assets/Man_reading_book_character_illustration.svg";
-
+import { db } from "../../firebase";
 function Login({ providers }) {
+  const f = collection(db, "users");
+  console.log(f);
   return (
     <div className="flex flex-col items-center space-y-1 pt-48 bg-black">
       <Image

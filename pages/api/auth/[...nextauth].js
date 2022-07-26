@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
+import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 import GoogleProvider from "next-auth/providers/google";
+
+const firebaseConfig = {};
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -10,6 +13,7 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
+
   callbacks: {
     async session({ session, token }) {
       session.user.tag = session.user.name

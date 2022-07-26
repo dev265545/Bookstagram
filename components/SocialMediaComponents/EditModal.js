@@ -195,7 +195,7 @@ function EditModal({ user }) {
                   sendPost();
                 }}
               >
-                Post
+                Save
               </button>
             </div>
           </Transition.Child>

@@ -15,6 +15,7 @@ import {
   where,
   setDoc,
   doc,
+  getDoc,
   getDocs,
   serverTimestamp,
   addDoc,
@@ -35,25 +36,27 @@ export default function Home({ trendingResults, providers }) {
   );
 
   if (!session) return <Login providers={providers} />;
-  const userRef = collection(db, "users");
-  let x = [];
 
-  let data = userset.map((user) => user.id == session.user.uid && user.data());
-  data = data.filter(isNaN);
-  console.log(data);
-  if ((data.length = 0)) {
-    setDoc(doc(data, session.user.uid), {
-      id: session.user.uid,
-      tag: session.user.tag,
-      username: session.user.name,
-      userImg: session.user.image,
-      email: session.user.email,
-      coverphoto: "https://i.im.ge/2022/07/26/FLevID.jpg",
-      bio: "",
-      timestamp: serverTimestamp(),
-    });
-    console.log("success");
-  }
+  getDoc(doc(db, "users", session.user.uid)).then((docSnap) => {
+    if (docSnap.exists()) {
+      console.log("user exsits");
+    } else {
+      console.log("No such document!");
+      {
+        setDoc(doc(db, "users", session.user.uid), {
+          id: session.user.uid,
+          tag: session.user.tag,
+          username: session.user.name,
+          userImg: session.user.image,
+          email: session.user.email,
+          coverphoto: "https://i.im.ge/2022/07/26/FLevID.jpg",
+          bio: "",
+          timestamp: serverTimestamp(),
+        });
+        console.log("success");
+      }
+    }
+  });
 
   return (
     <div className="">

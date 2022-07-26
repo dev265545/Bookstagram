@@ -58,12 +58,11 @@ function Follow({ user }) {
       className="hover:bg-white hover:bg-opacity-[0.03] px-4 py-2 cursor-pointer transition duration-200 ease-out flex items-center"
       key={user.id}
     >
-      <Image
+      <img
         alt="hello"
-        src={user.userImg}
+        src={user?.userImg}
         width={50}
         height={50}
-        objectFit="cover"
         className="rounded-full"
       />
       <div className="ml-4 leading-5 group">

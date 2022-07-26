@@ -34,7 +34,7 @@ function Sidebar() {
 
         <SidebarLink
           text="Favourite Books"
-          link="FavBooks"
+          link="/FavBooks"
           Icon={BookmarkIcon}
         />
         {/* <SidebarLink text="Lists" link="/Explore" Icon={ClipboardListIcon} /> */}

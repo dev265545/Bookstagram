@@ -61,7 +61,7 @@ const Modal = ({
     <>
       <>
         <div
-          className=" backdrop-blur-md  fade fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+          className=" backdrop-blur-md  fade fixed top-0 left-0   w-full h-full outline-none overflow-x-hidden overflow-y-auto"
           id="exampleModalFullscreen"
           aria-labelledby="exampleModalFullscreenLabel"
           aria-hidden="true"
