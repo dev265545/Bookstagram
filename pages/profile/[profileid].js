@@ -60,7 +60,7 @@ export default function ProfilePage({
         <title> Profile|Bookstagram </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
+      <main className=" min-h-screen flex max-w-[1500px] mx-auto">
         <Sidebar />
         {data[0] !== undefined ? (
           <ProfileComp data={data} />
@@ -85,16 +85,16 @@ export async function getServerSideProps(context) {
   const trendingResults = await fetch(
     "https://newsapi.org/v2/everything?q=books&apiKey=fc148f9a798147d9a11ec0397cbe8577"
   ).then((res) => res.json());
-  const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
-    (res) => res.json()
-  );
+  // const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
+  //   (res) => res.json()
+  // );
   const providers = await getProviders();
   const session = await getSession(context);
 
   return {
     props: {
       trendingResults,
-      followResults,
+
       providers,
       session,
     },
